@@ -2,7 +2,7 @@
 
 ## Preface
 
-In this repository, we implement a python framework using NumPy and NLTK to load and process the GloVe word embeddings into a vocabulary to be used in machine learning projects. Below is the origin homepage for GloVe with linkes to other sources and data files that may be interesting to read.
+In this repository, we implement a python framework using NumPy and NLTK to load and process the GloVe word embeddings into a vocabulary to be used in machine learning projects. Below is the original homepage for GloVe with links to other sources and data files that may be interesting to read.
 
 https://nlp.stanford.edu/projects/glove/
 
@@ -43,7 +43,7 @@ If you see this message, you are good to go.
 
 ## Usage
 
-Congratulations, you are now prepared to run your natural language experiemnts using one of the most powerful word embeddings. You can load the glove vocabulary and embedding matrix using the following command.
+Congratulations, you are now prepared to run your natural language experiments using one of the most powerful word embeddings. You can load the glove vocabulary and embedding matrix using the following command.
 
 ```
 brandon@btrabucco.com:~/glove$ python3
