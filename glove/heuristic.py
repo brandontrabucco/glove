@@ -35,8 +35,16 @@ def dump(config):
     heuristic_name = os.path.join(config.heuristic_dir, "heuristic.%s.%s.%s.txt" % (
         str(config.embedding) + "d", str(config.length) + "w", str(config.radius) + "k"))
     heuristic = np.sum(neighbor_distances, axis=1)
+
+    words_name = os.path.join(config.heuristic_dir, "heuristic.%s.%s.%s.sorted.names.txt" % (
+        str(config.embedding) + "d", str(config.length) + "w", str(config.radius) + "k"))
+    words = sorted(list(range(config.length)), key=(lambda idx: heuristic[idx]))
+    words = [vocab.id_to_word(idx) + "\n" for idx in words]
+
     np.savetxt(heuristic_name, heuristic)
-    print("Saved heuristic to %s." % heuristic_name)
+    with open(words_name, "w") as f:
+        f.writelines(words)
+    print("Saved %s and %s." % (heuristic_name, words_name))
 
 
 def dump_default():
