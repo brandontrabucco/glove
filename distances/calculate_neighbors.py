@@ -7,12 +7,16 @@ import glove.configuration
 import glove.neighbors
 
 
-config = glove.configuration.Configuration(
+config = glove.configuration.NeighborConfiguration(
     embedding=300, 
     filedir="../embeddings/", 
     length=70000,
     start_word="<S>",
     end_word="</S>",
-    unk_word="<UNK>")
+    unk_word="<UNK>",
+    radius=20,
+    distances_dir="./",
+    distances_threads=7)
+
 
 glove.neighbors.dump(config)
