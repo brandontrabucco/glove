@@ -92,4 +92,3 @@ def dump_default():
         distances_threads=7)
 
     return dump(config)
-

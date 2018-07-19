@@ -72,3 +72,4 @@ def check(vocab_names, embedding_vectors, config):
             low=-0.1, high=0.1, size=config.embedding))
     
     return vocab_names, embedding_vectors
+

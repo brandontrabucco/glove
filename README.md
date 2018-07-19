@@ -53,6 +53,4 @@ brandon@btrabucco.com:~/glove$ python3
 >>> vocab, embeddings = glove.load(config)
 Loading embeddings from some/directory/to/embeddings.txt.
 Vocab initialized with ... words.
->>> 
 ```
-

@@ -4,7 +4,6 @@ Install the GloVe package as a library.
 
 
 from setuptools import setup
-import nltk
 
 
 setup(name='glove',
@@ -16,7 +15,3 @@ setup(name='glove',
       license='MIT',
       packages=['glove'],
       zip_safe=False)
-
-
-# Download some files.
-nltk.download("punkt")

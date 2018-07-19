@@ -64,5 +64,3 @@ def dump_default():
         heuristic_dir="./heuristic/")
 
     return dump(config)
-
-

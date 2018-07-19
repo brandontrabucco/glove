@@ -81,4 +81,3 @@ class HeuristicConfiguration(NeighborConfiguration, collections.namedtuple(
     """
 
     pass
-
