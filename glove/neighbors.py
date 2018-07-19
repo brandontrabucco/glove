@@ -16,6 +16,29 @@ np.random.seed(1234567)
 import glove
 
 
+def compute_neighbors(embeddings, word_ids, k=5):
+    """Compute the k closest neighbors to the word ids in embedding space.
+    Args:
+        embeddings: The emebedding matrix.
+        word_ids: The word ids to evaluate the neighbors of.
+    Returns:
+        output_ids: The k closest words to word_ids
+        output_distances: Distances corresponding to output_ids.
+    """
+    
+    output_ids = []
+    output_distances = []
+    for idx in word_ids:
+        embedded = embeddings[idx:(idx + 1), :]
+        distances = np.linalg.norm(embeddings - embedded, axis=1)
+        closest = np.argsort(distances)[:k]
+        distances = distances[closest]
+        output_ids.append(closest)
+        output_distances.append(distances)
+        
+    return output_ids, output_distances
+
+
 def _compute_neighbors(thread_index, ranges, embeddings, 
                        neighbor_ids, neighbor_distances):
     """Computes the k closest words to a set fo words in embedding space.
