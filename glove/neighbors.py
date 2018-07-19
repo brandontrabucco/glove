@@ -16,6 +16,22 @@ np.random.seed(1234567)
 import glove
 
 
+def word_neighbors(vocab, embeddings, words, k=5):
+    """Compute the k closest neighbors to the word ids in embedding space.
+    Args:
+        vocab: The vocabulary object.
+        embeddings: The emebedding matrix.
+        words: List of words to evaluate.
+    Returns:
+        outputs: The k closest words to words
+    """
+    
+    output_ids, output_distances = compute_neighbors(
+        embeddings, [vocab.word_to_id(str(w).strip().lower()) for w in words], k=5)
+        
+    return [[vocab.id_to_word(idx) for idx in x] for x in output_ids]
+
+
 def compute_neighbors(embeddings, word_ids, k=5):
     """Compute the k closest neighbors to the word ids in embedding space.
     Args:
