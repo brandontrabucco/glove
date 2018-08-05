@@ -27,7 +27,7 @@ def word_neighbors(vocab, embeddings, words, k=5):
     """
     
     output_ids, output_distances = compute_neighbors(
-        embeddings, [vocab.word_to_id(str(w).strip().lower()) for w in words], k=5)
+        embeddings, [vocab.word_to_id(str(w).strip().lower()) for w in words], k=k)
         
     return [[vocab.id_to_word(idx) for idx in x] for x in output_ids]
 
