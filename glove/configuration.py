@@ -71,6 +71,17 @@ class NeighborConfiguration(Configuration, collections.namedtuple(
     pass
 
 
+class TaggerConfiguration(collections.namedtuple(
+        "Tagger", [
+            "tagger_dir"])):
+    """Parameter class for computing the part of speech tagger.
+    Args:
+        tagger_dir: folder to dump the part of speech tagger
+    """
+
+    pass
+
+
 @merge_fields
 class HeuristicConfiguration(NeighborConfiguration, collections.namedtuple(
         "HeuristicParams", [
