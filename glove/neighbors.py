@@ -10,9 +10,6 @@ import nltk
 import threading
 
 
-np.random.seed(1234567)
-
-
 import glove
 
 
