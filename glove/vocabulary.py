@@ -9,9 +9,6 @@ import collections
 import nltk
 
 
-np.random.seed(1234567)
-
-
 class Vocabulary(object):
     """Vocabulary class for word embeddings."""
 
@@ -47,22 +44,24 @@ class Vocabulary(object):
     def word_to_id(self, word):
         """Returns the integer word id of a word string.
         """
-        
-        if word in self.vocab:
-            return self.vocab[word]
-        else:
+
+        if isinstance(word, list):
+            return [self.word_to_id(w) for w in word]
+        if word not in self.vocab:
             return self.unk_id
+        return self.vocab[word]
 
 
-    def id_to_word(self, word_id):
+    def id_to_word(self, index):
         """Returns the word string of an integer word id.
         """
-        
-        if word_id >= len(self.reverse_vocab):
+
+        if isinstance(index, list):
+            return [self.id_to_word(i) for i in index]
+        if index < 0 or index >= len(self.reverse_vocab):
             return self.reverse_vocab[self.unk_id]
-        else:
-            return self.reverse_vocab[word_id]
-        
+        return self.reverse_vocab[index]
+
         
     def cleanup_chunk(self, text_chunk):
         """Utility for cleaning up a block of text.
