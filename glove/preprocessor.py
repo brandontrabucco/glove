@@ -9,9 +9,6 @@ import collections
 import nltk
 
 
-np.random.seed(1234567)
-
-
 import glove.vocabulary
 import glove.utils
 
