@@ -12,9 +12,6 @@ from nltk.corpus import brown
 from glove import cached_load
 
 
-np.random.seed(1234567)
-
-
 import glove
 
 
