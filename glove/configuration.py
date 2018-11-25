@@ -9,9 +9,6 @@ import collections
 import nltk
 
 
-np.random.seed(1234567)
-
-
 def merge_fields(cls):
     """Combine multiple named tuples into a single tuple class.
     Args:
