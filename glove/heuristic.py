@@ -66,15 +66,14 @@ def dump_default():
     return dump(config)
 
 
-def get_scores(words_list, vocab, tagger):
+def get_best_first_scores(words_list, vocab, tagger):
     """Returns the Best First Score for each word in the list.
     """
 
     POS_scores = {"NOUN": 11, "VERB": 10, "ADJ": 9, "NUM": 8,
         "ADV": 7, "PRON": 6, "PRT": 5, "ADP": 4,
         "DET": 3, "CONJ": 2, ".": 1, "X": 0 }
-    word_tags = [POS_scores[t] for t in tagger.tag(words_list)]
-    word_ids = [vocab.word_to_id(w) for w in words_list]
-    word_scores = [
-        (x / 11) + (y / len(vocab.reverse_vocab)) for x, y in zip(word_tags, word_ids)]
+    word_tags = [POS_scores[t] / 11 for _, t in tagger.tag(words_list)]
+    word_ids = [vocab.word_to_id(w) / len(vocab.reverse_vocab) for w in words_list]
+    word_scores = [np.log(np.exp(x) + y) for x, y in zip(word_tags, word_ids)]
     return word_scores
