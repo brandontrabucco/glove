@@ -15,9 +15,19 @@ if __name__ == "__main__":
     tagger = glove.tagger.load_default()
     source_words = ["a", "black", "and", "white", "spotted", "cat", 
                     "sleeping", "on", "a", "sofa", "cushion", "."]
-    scores = glove.heuristic.get_best_first_scores(
+    sorted_words, insertion_slots = glove.heuristic.make_insertion_sequence(
         source_words, vocab, tagger)
-    print(source_words)
-    print(scores)
-    print(list(zip(*list(sorted(list(zip(source_words, scores)), key=lambda x: -x[1]))))[0])
+    print(sorted_words)
+    print(insertion_slots)
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     

@@ -76,4 +76,41 @@ def get_best_first_scores(words_list, vocab, tagger):
     word_tags = [POS_scores[t] / 11 for _, t in tagger.tag(words_list)]
     word_ids = [vocab.word_to_id(w) / len(vocab.reverse_vocab) for w in words_list]
     word_scores = [np.log(np.exp(x) + y) for x, y in zip(word_tags, word_ids)]
+    
     return word_scores
+
+
+def make_insertion_sequence(words_list, vocab, tagger):
+        """Generates a sequence of indices to insert the words in best first order.
+        """
+        
+        scores = get_best_first_scores(words_list, vocab, tagger)
+        enumerated_words = list(enumerate(words_list))
+        scored_words = list(zip(enumerated_words, scores))
+        sorted_scored_words = list(sorted(scored_words, key=lambda x: -x[1]))
+        sorted_enumerated_words = list(list(zip(*sorted_scored_words))[0])
+        sorted_words = list(list(zip(*sorted_enumerated_words))[1])
+        
+        running_caption = [sorted_enumerated_words.pop(0)]
+        insertion_slots = [0]
+        while len(sorted_enumerated_words) > 0:
+            
+            next_word = sorted_enumerated_words.pop(0)
+            bottom_pointer = 0
+            top_pointer = len(running_caption)
+            
+            while not bottom_pointer == top_pointer:
+                
+                reference_word = running_caption[(top_pointer + bottom_pointer) // 2]
+                if reference_word[0] > next_word[0]:
+                    top_pointer = (top_pointer + bottom_pointer) // 2
+                elif reference_word[0] < next_word[0]:
+                    bottom_pointer = (top_pointer + bottom_pointer) // 2 + 1
+                else:
+                    top_pointer = (top_pointer + bottom_pointer) // 2
+                    bottom_pointer = (top_pointer + bottom_pointer) // 2
+                    
+            running_caption.insert(top_pointer, next_word)
+            insertion_slots.append(top_pointer)
+            
+        return sorted_words, insertion_slots
