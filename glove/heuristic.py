@@ -77,6 +77,33 @@ def get_best_first_scores(words_list, vocab, tagger):
     return word_scores
 
 
+def get_descriptive_scores(words_list, vocab, tagger):
+    """Returns the Descriptive Score for each word in the list.
+    """
+
+    POS_scores = {"NOUN": 1.0, "VERB": 1.0, "ADJ": 1.0, "NUM": 1.0,
+        "ADV": 0.0, "PRON": 0.0, "PRT": 0.0, "ADP": 0.0,
+        "DET": 0.0, "CONJ": 0.0, ".":   0.0, "X":   0.0 }
+    word_scores = [POS_scores[t] for _, t in tagger.tag(words_list)]
+    
+    return word_scores
+
+
+def get_top_k_words(words_list, vocab, tagger, k=1000):
+    """Returns the top k words in the word list per part of speech.
+    """
+
+    POS_scores = {"NOUN": [], "VERB": [], "ADJ": [], "NUM": [], 
+        "ADV": [], "PRON": [], "PRT": [], "ADP": [],
+        "DET": [], "CONJ": [], ".": [], "X": [] }
+    for word, tag in tagger.tag(words_list):
+        POS_scores[tag].append([word, vocab.word_to_id(word)])
+    for tag in POS_scores.keys():
+        POS_scores[tag] = list(zip(*list(sorted(POS_scores[tag], key=lambda x: x[1]))[:k]))[0]
+    
+    return POS_scores
+
+
 def make_insertion_sequence(words_list, vocab, tagger):
         """Generates a sequence of indices to insert the words in best first order.
         """
